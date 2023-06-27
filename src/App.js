@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css';
 
 import CardsList from './components/CardsList'
+import NewCardForm from './components/NewCardForm';
 
 // list of components
 // Monica works on Board components, Julie works on Card components
@@ -17,12 +18,20 @@ const INITIAL_CARD_DATA = [
   {
     id: 101,
     message: 'testing',
-    likesCount: 2
+    likes_count: 2,
+    board_id: 11
   },
   {
     id: 102,
     message: 'testing 2',
-    likesCount: 3
+    likes_count: 3,
+    board_id: 11
+  },
+  {
+    id: 103,
+    message: 'testing 3',
+    likes_count: 5,
+    board_id: 11
   }
 ]
   // +1 use state for number of votes
@@ -66,6 +75,7 @@ function App() {
           </section>
           <section className="new-card-form__container">
             <h2>Create a New Card</h2>
+            <NewCardForm></NewCardForm>
           </section>
         </section>
       </div>
