@@ -1,4 +1,8 @@
+import React from 'react'
 import './App.css';
+
+import CardsList from './components/CardsList'
+
 // list of components
 // Monica works on Board components, Julie works on Card components
 // 1. BoardsList
@@ -9,7 +13,18 @@ import './App.css';
 // 6. Form for creating new card
 
 // INITIAL_BOARD_DATA
-// INITIAL_CARD_DATA
+const INITIAL_CARD_DATA = [
+  {
+    id: 101,
+    message: 'testing',
+    likesCount: 2
+  },
+  {
+    id: 102,
+    message: 'testing 2',
+    likesCount: 3
+  }
+]
   // +1 use state for number of votes
   // talk to Angie and Jen if that is in the backend
 
@@ -41,6 +56,17 @@ function App() {
           {/* Another section to show cards */}
           {/* cards list component (similar to StudentList) */}
           {/* component to a form to create new cards for the board */}
+        </section>
+        <section className="cards__container">
+          <section>
+            <h2>Cards</h2>
+            <CardsList
+            listOfCards={INITIAL_CARD_DATA}
+            ></CardsList>
+          </section>
+          <section className="new-card-form__container">
+            <h2>Create a New Card</h2>
+          </section>
         </section>
       </div>
       <footer></footer>
