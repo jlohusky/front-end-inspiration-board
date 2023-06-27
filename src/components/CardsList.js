@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Card.css'
+import './CardsList.css'
 import Card from './Card'
 
 const CardsList = (props) => {
