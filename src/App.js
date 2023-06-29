@@ -90,6 +90,25 @@ const deleteCard = (cardId) => {
   });
 };
 
+const updateLikes = (cardId) => {
+  axios.put(`http://127.0.0.1:5000/cards/${cardId}/like`)
+  .then( (response) => {
+    const updatedCards = displayedCards.map(card => {
+      if (card.id === cardId) {
+        return {...card,likes_count: card.likes_count++}
+        } else {
+          return {...card}
+        }
+    })
+
+    setDisplayedCards(updatedCards);
+    getCards(selectedBoard.board_id)
+  })
+  .catch( (error) => {
+    console.log('could not update likes', error);
+  })
+}
+
   return (
     <div className="page__container">
       <div className="content__container">
@@ -121,6 +140,7 @@ const deleteCard = (cardId) => {
             <CardsList
             listOfCards={displayedCards}
             deleteCard={deleteCard}
+            updateLikes={updateLikes}
             ></CardsList>
           </section>
           <section className="new-card-form__container">

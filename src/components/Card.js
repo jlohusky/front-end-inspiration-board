@@ -7,6 +7,11 @@ const Card = (props) => {
     const toggleDelete = () => {
         console.log('delete button clicked!')
         props.deleteCard(props.id)
+    };
+
+    const toggleLike = () => {
+        console.log('like button clicked!')
+        props.updateLikes(props.id)
     }
 
     return (
@@ -14,7 +19,7 @@ const Card = (props) => {
             <p>{props.cardMessage}</p>
             <ul>
                 <li>{props.likesCount} ❤️</li>
-                <li><button onClick={() => {console.log('like button clicked!')}}>+❤️</button></li>
+                <li><button onClick={toggleLike}>+❤️</button></li>
                 <li><button onClick={toggleDelete}>Delete</button></li>
             </ul>
         </section>

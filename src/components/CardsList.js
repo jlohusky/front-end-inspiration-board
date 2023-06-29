@@ -9,8 +9,9 @@ const CardsList = (props) => {
             <Card
             id={card.id}
             cardMessage={card.message}
-            likesCount={card.likesCount}
+            likesCount={card.likes_count}
             deleteCard={props.deleteCard}
+            updateLikes={props.updateLikes}
             ></Card>
         )
     })
