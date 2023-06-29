@@ -69,6 +69,27 @@ const createCard = (boardId, newCard) => {
   });
 };
 
+const deleteCard = (cardId) => {
+  axios.delete(`http://127.0.0.1:5000/cards/${cardId}`)
+  .then( (response) => {
+    const updatedCards = displayedCards.map(card => {
+      if (card.id !== cardId) {
+        return {...card};
+      }
+    });
+
+    const filteredUpdatedCards = updatedCards.filter(function (element) {
+      return element !== undefined;
+    });
+
+    console.log('deleteCard success!', response.data)
+    setDisplayedCards(filteredUpdatedCards);
+  })
+  .catch( (error) => {
+    console.log('could not delete task', error)
+  });
+};
+
   return (
     <div className="page__container">
       <div className="content__container">
@@ -99,7 +120,7 @@ const createCard = (boardId, newCard) => {
             <h2>Cards</h2>
             <CardsList
             listOfCards={displayedCards}
-            // INITIAL_CARD_DATA will be useState variable of cards
+            deleteCard={deleteCard}
             ></CardsList>
           </section>
           <section className="new-card-form__container">
