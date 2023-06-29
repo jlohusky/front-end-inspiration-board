@@ -22,7 +22,7 @@ const NewCardForm = (props) => {
     const onFormSubmit = (event) => {
         event.preventDefault();
 
-        // props.createCard(cardFormData);
+        props.createCard(props.boardId, cardFormData);
 
         setCardFormData(INITIAL_FORM_DATA);
     };

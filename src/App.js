@@ -6,52 +6,16 @@ import axios from 'axios';
 import CardsList from './components/CardsList'
 import NewCardForm from './components/NewCardForm';
 
-// list of components
-// Monica works on Board components, Julie works on Card components
-// 1. BoardsList
-// 2. Board
-// 3. Form for creating new board
-// 4. CardsList
-// 5. Cards
-// 6. Form for creating new card
-
 const INITIAL_BOARD_DATA = {
   "board_id": '',
   "cards": [],
   "title": ''
 }
 const INITIAL_CARD_DATA = []
-// const INITIAL_CARD_DATA = [
-//   {
-//     id: 101,
-//     message: 'testing',
-//     likes_count: 2,
-//     board_id: 11
-//   },
-//   {
-//     id: 102,
-//     message: 'testing 2',
-//     likes_count: 3,
-//     board_id: 11
-//   },
-//   {
-//     id: 103,
-//     message: 'testing 3',
-//     likes_count: 5,
-//     board_id: 11
-//   }
-// ]
-  // +1 use state for number of votes
 
 function App() {
-// use state for which board is being displayed on the bottom
-  // default is blank
-  // GET "/<board_id>/cards" method sets use state for cards displayed
-
-// use state for cards, initial value is blank
-
 const [existingBoards, setExistingBoards] = useState([])
-const [selectedBoard, setSelectedBoard] = useState(INITIAL_BOARD_DATA.board_id);
+const [selectedBoard, setSelectedBoard] = useState(INITIAL_BOARD_DATA);
 const [displayedCards, setDisplayedCards] = useState(INITIAL_CARD_DATA);
 
 const getBoards = () => {
@@ -84,7 +48,9 @@ const getCards = (boardId) => {
     });
 
     setDisplayedCards(cardsToDisplay);
+    setSelectedBoard(response.data)
     console.log('getCards success!', displayedCards)
+    console.log('getCards success 2!', selectedBoard)
   })
   .catch( (error) => {
     console.log('error', error)
@@ -95,6 +61,7 @@ const createCard = (boardId, newCard) => {
   axios.post(`http://127.0.0.1:5000/board/${boardId}/cards`, newCard)
   .then( (response) => {
     getBoards();
+    getCards(boardId);
     console.log('createCard sucess!', response.data)
   })
   .catch( (error) => {
@@ -137,7 +104,9 @@ const createCard = (boardId, newCard) => {
           </section>
           <section className="new-card-form__container">
             <h2>Create a New Card</h2>
-            <NewCardForm></NewCardForm>
+            <NewCardForm
+            createCard={createCard}
+            boardId={selectedBoard.board_id}></NewCardForm>
           </section>
         </section>
       </div>
