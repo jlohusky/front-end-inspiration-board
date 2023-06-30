@@ -114,12 +114,12 @@ useEffect( () => {getBoards()}, []);
 useEffect( () => {getCards(1)}, []);
 
   return (
-    <div className="page__container">
+    <div className="page__container" class="content">
       <div className="content__container">
-        <h1>Inspiration Board</h1>
+        <h1 class="shimmer">✨ Inspiration Board ✨</h1>
         <section className="boards__container">
           <section>
-            <h2>Boards</h2>
+            <h2 class="boards">Boards</h2>
             <ol className="boards__list">
               {/* list of existing boards, list of elements */}
               {/* boards list component (similar to StudentList) */}
@@ -127,12 +127,12 @@ useEffect( () => {getCards(1)}, []);
             </ol>
           </section>
           <section>
-            <h2>Selected Board</h2>
+            <h2 class="selectedBoard">Selected Board</h2>
             <p>{selectedBoard.title}</p>
             {/* name of board that was clicked on and is being shown */}
           </section>
           <section className='new-board-form__container'>
-            <h2>Create a New Board</h2>
+            <h2 class="newBoard">Create a New Board</h2>
             {/* component to a form to create a new board */}
           </section>
         </section>
@@ -141,7 +141,7 @@ useEffect( () => {getCards(1)}, []);
           {/* component to a form to create new cards for the board */}
         <section className="cards__container">
           <section>
-            <h2>Cards</h2>
+            <h2 class="cards">Cards</h2>
             <CardsList
             listOfCards={displayedCards}
             deleteCard={deleteCard}
@@ -149,7 +149,7 @@ useEffect( () => {getCards(1)}, []);
             ></CardsList>
           </section>
           <section className="new-card-form__container">
-            <h2>Create a New Card</h2>
+            <h2 class="createCard">Create a New Card</h2>
             <NewCardForm
             createCard={createCard}
             boardId={selectedBoard.board_id}></NewCardForm>

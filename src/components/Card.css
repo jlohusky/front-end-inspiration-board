@@ -6,7 +6,8 @@ section .a_card {
     min-height: 10rem;
     max-width: 12rem;
     max-height: 16rem;
-    border: 2px solid  red;
+    border: 3px solid rgb(212, 93, 121);
+    border-radius: 10px;
     text-align: center;
     overflow-wrap: break-word;
 }
@@ -18,4 +19,11 @@ ul {
 li {
     float: left;
     padding: 4px;
+}
+
+.createCard {
+    border-radius: 10px;
+}
+.cards {
+    border-radius: 10px;
 }
