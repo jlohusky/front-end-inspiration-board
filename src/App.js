@@ -1,22 +1,113 @@
+import React from 'react'
+import { useState, useEffect } from 'react';
 import './App.css';
-// list of components
-// Monica works on Board components, Julie works on Card components
-// 1. BoardsList
-// 2. Board
-// 3. Form for creating new board
-// 4. CardsList
-// 5. Cards
-// 6. Form for creating new card
+import axios from 'axios';
 
-// INITIAL_BOARD_DATA
-// INITIAL_CARD_DATA
-  // +1 use state for number of votes
-  // talk to Angie and Jen if that is in the backend
+import CardsList from './components/CardsList'
+import NewCardForm from './components/NewCardForm';
+
+const INITIAL_BOARD_DATA = {
+  "board_id": '',
+  "cards": [],
+  "title": ''
+}
+const INITIAL_CARD_DATA = []
 
 function App() {
-// use state for which board is being displayed on the bottom
-  // default is blank
-// use state for cards 
+const [existingBoards, setExistingBoards] = useState([])
+const [selectedBoard, setSelectedBoard] = useState(INITIAL_BOARD_DATA);
+const [displayedCards, setDisplayedCards] = useState(INITIAL_CARD_DATA);
+
+const getBoards = () => {
+  axios.get('http://127.0.0.1:5000/board')
+  .then( (response) => {
+    const initialBoards = [];
+    response.data.forEach(board => {
+      initialBoards.push(board)
+    });
+    setExistingBoards(initialBoards);
+    console.log('getBoards success!', existingBoards)
+  })
+  .catch( (error) => {
+    console.log('error', error)
+  });
+};
+
+useEffect( () => {getBoards()}, []);
+
+// useEffect testing zone
+useEffect( () => {getCards(1)}, []);
+
+const getCards = (boardId) => {
+  axios.get(`http://127.0.0.1:5000/board/${boardId}/cards`)
+  .then( (response) => {
+    // console.log('getCards success!', response.data.cards)
+    const cardsToDisplay = []
+    response.data.cards.forEach(card => {
+      cardsToDisplay.push(card)
+    });
+
+    setDisplayedCards(cardsToDisplay);
+    setSelectedBoard(response.data)
+    console.log('getCards success!', displayedCards)
+    console.log('getCards success 2!', selectedBoard)
+  })
+  .catch( (error) => {
+    console.log('error', error)
+  })
+}
+
+const createCard = (boardId, newCard) => {
+  axios.post(`http://127.0.0.1:5000/board/${boardId}/cards`, newCard)
+  .then( (response) => {
+    getBoards();
+    getCards(boardId);
+    console.log('createCard sucess!', response.data)
+  })
+  .catch( (error) => {
+    console.log('error', error)
+  });
+};
+
+const deleteCard = (cardId) => {
+  axios.delete(`http://127.0.0.1:5000/cards/${cardId}`)
+  .then( (response) => {
+    const updatedCards = displayedCards.map(card => {
+      if (card.id !== cardId) {
+        return {...card};
+      }
+    });
+
+    const filteredUpdatedCards = updatedCards.filter(function (element) {
+      return element !== undefined;
+    });
+
+    console.log('deleteCard success!', response.data)
+    setDisplayedCards(filteredUpdatedCards);
+  })
+  .catch( (error) => {
+    console.log('could not delete task', error)
+  });
+};
+
+const updateLikes = (cardId) => {
+  axios.put(`http://127.0.0.1:5000/cards/${cardId}/like`)
+  .then( (response) => {
+    const updatedCards = displayedCards.map(card => {
+      if (card.id === cardId) {
+        return {...card,likes_count: card.likes_count++}
+        } else {
+          return {...card}
+        }
+    })
+
+    setDisplayedCards(updatedCards);
+    getCards(selectedBoard.board_id)
+  })
+  .catch( (error) => {
+    console.log('could not update likes', error);
+  })
+}
 
   return (
     <div className="page__container">
@@ -28,6 +119,7 @@ function App() {
             <ol className="boards__list">
               {/* list of existing boards, list of elements */}
               {/* boards list component (similar to StudentList) */}
+              {/* onClick event calls GET "/<board_id>/cards" method */}
             </ol>
           </section>
           <section>
@@ -38,9 +130,25 @@ function App() {
             <h2>Create a New Board</h2>
             {/* component to a form to create a new board */}
           </section>
+        </section>
           {/* Another section to show cards */}
           {/* cards list component (similar to StudentList) */}
           {/* component to a form to create new cards for the board */}
+        <section className="cards__container">
+          <section>
+            <h2>Cards</h2>
+            <CardsList
+            listOfCards={displayedCards}
+            deleteCard={deleteCard}
+            updateLikes={updateLikes}
+            ></CardsList>
+          </section>
+          <section className="new-card-form__container">
+            <h2>Create a New Card</h2>
+            <NewCardForm
+            createCard={createCard}
+            boardId={selectedBoard.board_id}></NewCardForm>
+          </section>
         </section>
       </div>
       <footer></footer>
