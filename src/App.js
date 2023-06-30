@@ -19,7 +19,7 @@ const [selectedBoard, setSelectedBoard] = useState(INITIAL_BOARD_DATA);
 const [displayedCards, setDisplayedCards] = useState(INITIAL_CARD_DATA);
 
 const getBoards = () => {
-  axios.get('http://127.0.0.1:5000/board')
+  axios.get('https://inspiration-board-sybl.onrender.com/board')
   .then( (response) => {
     const initialBoards = [];
     response.data.forEach(board => {
@@ -33,14 +33,9 @@ const getBoards = () => {
   });
 };
 
-useEffect( () => {getBoards()}, []);
-
-// useEffect testing zone - to be deleted after BoardsList is implemented
-useEffect( () => {getCards(1)}, []);
-
 // this is the function that sets selectedBoard and displayedCards
 const getCards = (boardId) => {
-  axios.get(`http://127.0.0.1:5000/board/${boardId}/cards`)
+  axios.get(`https://inspiration-board-sybl.onrender.com/board/${boardId}/cards`)
   .then( (response) => {
     // console.log('getCards success!', response.data.cards)
     const cardsToDisplay = []
@@ -59,7 +54,7 @@ const getCards = (boardId) => {
 }
 
 const createCard = (boardId, newCard) => {
-  axios.post(`http://127.0.0.1:5000/board/${boardId}/cards`, newCard)
+  axios.post(`https://inspiration-board-sybl.onrender.com/board/${boardId}/cards`, newCard)
   .then( (response) => {
     getBoards();
     getCards(boardId);
@@ -71,8 +66,9 @@ const createCard = (boardId, newCard) => {
 };
 
 const deleteCard = (cardId) => {
-  axios.delete(`http://127.0.0.1:5000/cards/${cardId}`)
+  axios.delete(`https://inspiration-board-sybl.onrender.com/cards/${cardId}`)
   .then( (response) => {
+    // eslint-disable-next-line
     const updatedCards = displayedCards.map(card => {
       if (card.id !== cardId) {
         return {...card};
@@ -92,7 +88,7 @@ const deleteCard = (cardId) => {
 };
 
 const updateLikes = (cardId) => {
-  axios.put(`http://127.0.0.1:5000/cards/${cardId}/like`)
+  axios.put(`https://inspiration-board-sybl.onrender.com/cards/${cardId}/like`)
   .then( (response) => {
     const updatedCards = displayedCards.map(card => {
       if (card.id === cardId) {
@@ -109,6 +105,13 @@ const updateLikes = (cardId) => {
     console.log('could not update likes', error);
   })
 }
+
+// eslint-disable-next-line
+useEffect( () => {getBoards()}, []);
+
+// useEffect testing zone - to be deleted after BoardsList is implemented
+// eslint-disable-next-line
+useEffect( () => {getCards(1)}, []);
 
   return (
     <div className="page__container">
