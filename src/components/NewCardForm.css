@@ -4,3 +4,9 @@
     align-items: flex-start;
     gap: .5em;
 }
+
+.form__container-message {
+    min-width: 10rem;
+    max-width: 15rem;
+    height: 5rem;
+}

@@ -16,7 +16,7 @@ const CardsList = (props) => {
         )
     })
     return(
-        <section>
+        <section className='CardsList__container'>
             {listOfCards}
         </section>
 

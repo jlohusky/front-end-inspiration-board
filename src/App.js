@@ -35,9 +35,10 @@ const getBoards = () => {
 
 useEffect( () => {getBoards()}, []);
 
-// useEffect testing zone
+// useEffect testing zone - to be deleted after BoardsList is implemented
 useEffect( () => {getCards(1)}, []);
 
+// this is the function that sets selectedBoard and displayedCards
 const getCards = (boardId) => {
   axios.get(`http://127.0.0.1:5000/board/${boardId}/cards`)
   .then( (response) => {
@@ -124,6 +125,7 @@ const updateLikes = (cardId) => {
           </section>
           <section>
             <h2>Selected Board</h2>
+            <p>{selectedBoard.title}</p>
             {/* name of board that was clicked on and is being shown */}
           </section>
           <section className='new-board-form__container'>

@@ -1,8 +1,14 @@
 section .a_card {
     display: inline-block;
-    margin: 4px 4px 4px 4px;
+    margin: 0.25rem 0.25rem 0.25rem 0.5rem;
+    padding: 0.5rem;
+    min-width: 12rem;
+    min-height: 10rem;
+    max-width: 12rem;
+    max-height: 16rem;
     border: 2px solid  red;
     text-align: center;
+    overflow-wrap: break-word;
 }
 
 ul {

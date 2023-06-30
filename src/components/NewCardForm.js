@@ -31,13 +31,16 @@ const NewCardForm = (props) => {
         <div>
             <form className="form__container" onSubmit={onFormSubmit}>
                 <label htmlFor="cardMessage">Message</label>
-                <input
+                <textarea
+                className="form__container-message"
                 id="message"
                 name="message"
                 type="text"
                 value={cardFormData.message}
                 onChange={inputChange}
-                ></input>
+                maxLength={250}
+                placeholder="250 character count limit"
+                ></textarea>
                 <input type="submit" value="Add a card!"></input>
             </form>
         </div>
