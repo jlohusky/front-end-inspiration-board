@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import CardsList from './components/CardsList'
 import NewCardForm from './components/NewCardForm';
+import BoardsList from './components/BoardsList';
+import NewBoardForm from './components/NewBoardForm';
 
 const INITIAL_BOARD_DATA = {
   "board_id": '',
@@ -106,6 +108,21 @@ const updateLikes = (cardId) => {
   })
 }
 
+const createNewBoard = (newBoard) => {
+  axios
+    .post('https://inspiration-board-sybl.onrender.com/board', newBoard)
+    .then((response) => {
+      getBoards();
+      console.log('createNewBoard success!', response.data);
+    })
+    .catch((error) => {
+      console.log('error', error);
+    });
+};
+const handleBoardClick = (boardId) => {
+  getCards(boardId);
+};
+
 // eslint-disable-next-line
 useEffect( () => {getBoards()}, []);
 
@@ -121,6 +138,8 @@ useEffect( () => {getCards(1)}, []);
           <section>
             <h2 class="boards">Boards</h2>
             <ol className="boards__list">
+              <BoardsList boards={existingBoards} selectBoard={handleBoardClick} />
+
               {/* list of existing boards, list of elements */}
               {/* boards list component (similar to StudentList) */}
               {/* onClick event calls GET "/<board_id>/cards" method */}
@@ -132,7 +151,9 @@ useEffect( () => {getCards(1)}, []);
             {/* name of board that was clicked on and is being shown */}
           </section>
           <section className='new-board-form__container'>
-            <h2 class="newBoard">Create a New Board</h2>
+            <section className='new-board-form__container'>
+            <NewBoardForm createNewBoard={createNewBoard} />
+          </section>
             {/* component to a form to create a new board */}
           </section>
         </section>
