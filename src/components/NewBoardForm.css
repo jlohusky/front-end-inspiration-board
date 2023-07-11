@@ -1,0 +1,32 @@
+
+
+.form__container {
+    background-color: pink;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form__container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.form__container input[type="text"],
+.form__container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.form__container input[type="submit"] {
+    background-color: #ffffff;
+    color: pink;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
