@@ -14,12 +14,18 @@ const Card = (props) => {
         props.updateLikes(props.id)
     }
 
+    const toggleUnlike = () => {
+        console.log('Unlike button clicked!')
+        props.updateUnlikes(props.id)
+    }
+
     return (
         <section className="a_card" key={props.id}>
             <p>{props.cardMessage}</p>
             <ul>
                 <li>{props.likesCount} ❤️</li>
                 <li><button onClick={toggleLike}>+❤️</button></li>
+                <li><button onClick={toggleUnlike}>-❤️</button></li>
                 <li><button onClick={toggleDelete}>Delete</button></li>
             </ul>
         </section>

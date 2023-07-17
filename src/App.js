@@ -108,6 +108,28 @@ const updateLikes = (cardId) => {
   })
 }
 
+const updateUnlikes = (cardId) => {
+  axios.put(`https://inspiration-board-sybl.onrender.com/cards/${cardId}/unlike`)
+  .then( (response) => {
+    const updatedCards = displayedCards.map(card => {
+      if (card.id === cardId) {
+        if (card.likes_count > -1) 
+        {
+          return {...card,likes_count: card.likes_count--}
+        }
+        } else {
+          return {...card}
+        }
+    })
+
+    setDisplayedCards(updatedCards);
+    getCards(selectedBoard.board_id)
+  })
+  .catch( (error) => {
+    console.log('could not update unlikes', error);
+  })
+}
+
 const createNewBoard = (newBoard) => {
   axios
     .post('https://inspiration-board-sybl.onrender.com/board', newBoard)
@@ -167,6 +189,7 @@ useEffect( () => {getCards(1)}, []);
             listOfCards={displayedCards}
             deleteCard={deleteCard}
             updateLikes={updateLikes}
+            updateUnlikes={updateUnlikes}
             ></CardsList>
           </section>
           <section className="new-card-form__container">

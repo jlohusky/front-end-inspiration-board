@@ -12,6 +12,7 @@ const CardsList = (props) => {
             likesCount={card.likes_count}
             deleteCard={props.deleteCard}
             updateLikes={props.updateLikes}
+            updateUnlikes={props.updateUnlikes}
             ></Card>
         )
     })
