@@ -5,6 +5,17 @@ import './NewBoardForm.css';
 const NewBoardForm = ({ createNewBoard }) => {
     const [title, setTitle] = useState('');
     const [owner, setOwner] = useState('');
+    const [showForm, setShowForm] = useState(true);
+
+    const handleCancelClick = () => {
+        setShowForm(false);
+    };
+    
+    if (!showForm) {
+        return (
+        <button onClick={() => setShowForm(true)}>Show Form</button>
+        );
+    };
 
     const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -46,6 +57,7 @@ const NewBoardForm = ({ createNewBoard }) => {
             required
         />
         <button type="submit">Create</button>
+        <button onClick={handleCancelClick}>Hide Form</button>
         </form>
     </div>
     );
