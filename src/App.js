@@ -7,6 +7,7 @@ import CardsList from './components/CardsList'
 import NewCardForm from './components/NewCardForm';
 import BoardsList from './components/BoardsList';
 import NewBoardForm from './components/NewBoardForm';
+import Footer from './components/Footer'
 
 const INITIAL_BOARD_DATA = {
   "board_id": '',
@@ -200,7 +201,7 @@ useEffect( () => {getCards(1)}, []);
           </section>
         </section>
       </div>
-      <footer></footer>
+      <Footer></Footer>
     </div>
   );
 }

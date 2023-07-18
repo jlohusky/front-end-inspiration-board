@@ -17,7 +17,7 @@
 .form__container input[type="text"],
 .form__container textarea {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 15px;
@@ -29,4 +29,19 @@
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
+}
+
+.new-board-form__container button {
+    background-color: #ffffff;
+    color: pink;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
+    margin: 0 auto;
+}
+
+button:hover {
+    background-color: palevioletred;
+    color: #ffffff;
 }
