@@ -89,3 +89,23 @@ h2 {
     background-position: 200% center;
   }
 }
+
+
+.board_title {
+  font-size: 2em;
+  padding-left: 50px;
+  animation: colorChange 2s ease-in-out infinite;
+  text-size-adjust: 30px;
+}
+
+@keyframes colorChange {
+  0% {
+    color: #f9acf9; /* Start color */
+  }
+  50% {
+    color: #ff91e9; /* Mid color */
+  }
+  100% {
+    color: #ff67f5; /* End color */
+  }
+}

@@ -169,8 +169,8 @@ useEffect( () => {getCards(1)}, []);
             </ol>
           </section>
           <section>
-            <h2 class="selectedBoard">Selected Board</h2>
-            <p>{selectedBoard.title}</p>
+            <h2 className="selectedBoard">Selected Board</h2>
+            <p className="board_title">{selectedBoard.title}</p>
             {/* name of board that was clicked on and is being shown */}
           </section>
           <section className='new-board-form__container'>

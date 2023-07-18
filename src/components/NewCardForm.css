@@ -10,6 +10,7 @@
     max-width: 15rem;
     height: 5rem;
     border-radius: 10px;
+    margin: 0 auto;
 }
 
 .form__container-error {
@@ -23,4 +24,7 @@
 
 .form__container input[type="submit"]:hover {
     background-color: palevioletred;
+}
+.form__container input[type="submit"] {
+    margin: 0 auto;
 }
