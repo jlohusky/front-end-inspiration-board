@@ -1,22 +1,10 @@
-/* BoardsList.css */
-.boards-list__container {
-    margin-bottom: 20px;
+ul.boards-list__list li {
+    float: none;
+    list-style-type: disclosure-open;
 }
 
-.boards-list__heading {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+ul.boards-list__list li:hover {
+    color: burlywood;
+    /* hover:  */
 }
 
-.boards-list__list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.boards-list__item {
-    font-size: 16px;
-    color: #555;
-    cursor: pointer;
-}

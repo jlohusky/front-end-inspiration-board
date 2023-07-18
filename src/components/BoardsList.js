@@ -38,7 +38,6 @@ const BoardsList = (props) => {
     const boardItems = props.boards.map((board) => (
     <li
         key={board.board_id}
-        className="boards-list__item"
         onClick={() => handleBoardClick(board.board_id)}
     >
         {board.title}
@@ -46,9 +45,11 @@ const BoardsList = (props) => {
     ));
 
     return (
-    <section className="boards-list__container">
-        <ol className="boards-list__list">{boardItems}</ol>
-    </section>
+        <section className="boards-list__container">
+            <div>
+                <ul className="boards-list__list">{boardItems}</ul>
+            </div>
+        </section>
     );
 };
 
